@@ -349,9 +349,6 @@ class CarState(CarStateBase):
       signals += [
         ("Elect_Gear_Shifter", "ELECT_GEAR", 0),
       ]
-      checks += [
-        ("ELECT_GEAR", 20),
-      ]
     else:
       signals += [
         ("CF_Lvr_Gear","LVR12",0),
