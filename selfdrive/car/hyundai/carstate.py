@@ -151,7 +151,7 @@ class CarState(CarStateBase):
         ret.gearShifter = GearShifter.neutral
       elif gear == 0:
         ret.gearShifter = GearShifter.park
-      elif gear == 7:
+      elif gear == 6:
         ret.gearShifter = GearShifter.reverse
       else:
         ret.gearShifter = GearShifter.unknown
