@@ -599,6 +599,12 @@ CommunityPanel::CommunityPanel(QWidget* parent) : QWidget(parent) {
                                             "../assets/offroad/icon_shell.png",
                                             this));
 
+  toggles.append(new ParamControl("EmptyScreen",
+                                            "Show UI",
+                                            "",
+                                            "../assets/offroad/icon_shell.png"
+                                            ));
+
   toggles.append(new ParamControl("CustomLeadMark",
                                             "Use custom lead mark",
                                             "",

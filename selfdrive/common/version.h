@@ -1,1 +1,1 @@
-#define COMMA_VERSION "0.8.10_dev8_EQ"
+#define COMMA_VERSION "0.8.10_boxkon"

@@ -224,6 +224,7 @@ static void update_params(UIState *s) {
     Params params;
     scene.is_metric = params.getBool("IsMetric");
     s->show_debug_ui = params.getBool("ShowDebugUI");
+	s->empty_screen = params.getBool("EmptyScreen"); //화면비우기
 	s->custom_lead_mark = params.getBool("CustomLeadMark");
   }
 }

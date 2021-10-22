@@ -129,7 +129,7 @@ const QColor bg_colors [] = {
   [STATUS_DISENGAGED] =  QColor(0x17, 0x33, 0x49, 0x64),
   [STATUS_ENGAGED] = QColor(0x00, 0xAA, 0xFF, 0x64),
   [STATUS_WARNING] = QColor(0xA3, 0xD9, 0xFF, 0x64),
-  [STATUS_ALERT] = QColor(0xC9, 0x22, 0x31, 0xf1),
+  [STATUS_ALERT] = QColor(0xC9, 0x22, 0x31, 0x64),
 };
 
 typedef struct {
@@ -211,7 +211,7 @@ typedef struct UIState {
   bool wide_camera;
 
   //
-  bool show_debug_ui, custom_lead_mark;
+  bool show_debug_ui, empty_screen, custom_lead_mark; //화면비우기
   TouchState touch;
   int lock_on_anim_index;
 

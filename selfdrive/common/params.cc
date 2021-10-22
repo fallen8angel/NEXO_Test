@@ -226,6 +226,7 @@ std::unordered_map<std::string, uint32_t> keys = {
     {"NewRadarInterface", PERSISTENT},
     {"DisableOpFcw", PERSISTENT},
     {"ShowDebugUI", PERSISTENT},
+    {"EmptyScreen", PERSISTENT}, // 스크린 비우기
     {"CustomLeadMark", PERSISTENT},
 
     {"SoftRestartTriggered", CLEAR_ON_MANAGER_START},

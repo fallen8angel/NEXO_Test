@@ -781,16 +781,18 @@ static void bb_ui_draw_UI(UIState *s) {
   const int bb_dmr_w = 180;
   const int bb_dmr_x = s->fb_w - bb_dmr_w - (bdr_is * 2);
   const int bb_dmr_y = (box_y + (bdr_is * 1.5)) + UI_FEATURE_RIGHT_Y;
-
+// 스위치 화면 비우기 시작
 #if UI_FEATURE_LEFT
-  bb_ui_draw_measures_left(s, bb_dml_x, bb_dml_y, bb_dml_w);
+  if(s->empty_screen)
+    bb_ui_draw_measures_left(s, bb_dml_x, bb_dml_y, bb_dml_w);
 #endif
 
 #if UI_FEATURE_RIGHT
-  bb_ui_draw_measures_right(s, bb_dmr_x, bb_dmr_y, bb_dmr_w);
+  if(s->empty_screen)
+    bb_ui_draw_measures_right(s, bb_dmr_x, bb_dmr_y, bb_dmr_w);
 #endif
-
-  bb_ui_draw_basic_info(s);
+  if(s->empty_screen)
+    bb_ui_draw_basic_info(s);
 
   if(s->show_debug_ui)
     bb_ui_draw_debug(s);
@@ -806,7 +808,7 @@ static void ui_draw_vision_scc_gap(UIState *s) {
   int autoTrGap = scc_smoother.getAutoTrGap();
 
   const int radius = 96;
-  const int center_x = radius * 5 + (bdr_s * 2);
+  const int center_x = radius + (bdr_s * 2);
   const int center_y = s->fb_h - footer_h / 2;
 
   NVGcolor color_bg = nvgRGBA(0, 0, 0, (255 * 0.1f));
@@ -965,7 +967,7 @@ static void ui_draw_vision_speed(UIState *s) {
       nvgLineTo(s->vg, viz_blinker_x - (viz_add*offset) - (viz_blinker_w/2), (header_h/2.1));
       nvgLineTo(s->vg, viz_blinker_x - (viz_add*offset)                    , (header_h/1.4));
       nvgClosePath(s->vg);
-      nvgFillColor(s->vg, COLOR_LIME_ALPHA(180 * alpha));
+      nvgFillColor(s->vg, COLOR_FORGEAR_ALPHA(180 * alpha));
       nvgFill(s->vg);
     }
     if(s->scene.rightBlinker) {
@@ -974,7 +976,7 @@ static void ui_draw_vision_speed(UIState *s) {
       nvgLineTo(s->vg, viz_blinker_x + (viz_add*offset) + (viz_blinker_w*1.5), (header_h/2.1));
       nvgLineTo(s->vg, viz_blinker_x + (viz_add*offset) + viz_blinker_w      , (header_h/1.4));
       nvgClosePath(s->vg);
-      nvgFillColor(s->vg, COLOR_LIME_ALPHA(180 * alpha));
+      nvgFillColor(s->vg, COLOR_FORGEAR_ALPHA(180 * alpha));
       nvgFill(s->vg);
     }
   }
@@ -1058,7 +1060,7 @@ static void ui_draw_vision_header(UIState *s) {
   ui_draw_vision_speed(s);
   //ui_draw_vision_event(s);
   bb_ui_draw_UI(s);
-  draw_currentgear(s);
+//  draw_currentgear(s);
   ui_draw_extras(s);
 }
 
@@ -1072,8 +1074,8 @@ static void ui_draw_vision(UIState *s) {
   ui_draw_vision_header(s);
   ui_draw_vision_scc_gap(s);
   //ui_draw_vision_brake(s);
-  ui_draw_vision_autohold(s);
-  ui_draw_vision_BSD(s);  
+//  ui_draw_vision_autohold(s);
+//  ui_draw_vision_BSD(s);  
 
 #if UI_FEATURE_DASHCAM
    if(s->awake && Hardware::EON())

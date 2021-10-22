@@ -29,6 +29,13 @@ class CarInterface(CarInterfaceBase):
 
     brake_max_bp = [0, 50., 80., 130.]
     brake_max_v = [CarControllerParams.ACCEL_MIN, -3., -3.5, -2.3]
+	
+#    gas_max_bp = [0., 5., 10., 30., 45., 70., 130.]
+#    gas_max_v = [0.3, 0.9, 1.08, 0.92, 0.615, 0.42, 0.33]
+
+#    brake_max_bp = [0., 5., 30., 50., 65., 130.]
+#    brake_max_v = [-0.9, -2.01, -2.5668, -2.535, -2.505, -2.49]
+
 
     return interp(v_current_kph, brake_max_bp, brake_max_v), interp(v_current_kph, gas_max_bp, gas_max_v)
 
@@ -49,9 +56,9 @@ class CarInterface(CarInterfaceBase):
     # lateral
     ret.lateralTuning.init('lqr')
 
-    ret.lateralTuning.lqr.scale = 1700.
+    ret.lateralTuning.lqr.scale = 1670.
     ret.lateralTuning.lqr.ki = 0.01
-    ret.lateralTuning.lqr.dcGain = 0.0028
+    ret.lateralTuning.lqr.dcGain = 0.002856
 
     ret.lateralTuning.lqr.a = [0., 1., -0.22619643, 1.21822268]
     ret.lateralTuning.lqr.b = [-1.92006585e-04, 3.95603032e-05]
@@ -60,17 +67,24 @@ class CarInterface(CarInterfaceBase):
     ret.lateralTuning.lqr.l = [0.3233671, 0.3185757]
 
     ret.steerRatio = 16.5
-    ret.steerActuatorDelay = 0.1
+    ret.steerActuatorDelay = 0.97
     ret.steerLimitTimer = 3.0
-    ret.steerRateCost = 0.55
+    ret.steerRateCost = 0.4
     ret.steerMaxBP = [0.]
-    ret.steerMaxV = [2.5]
+    ret.steerMaxV = [2.0]
 
     # longitudinal
     ret.longitudinalTuning.kpBP = [0., 10.*CV.KPH_TO_MS, 20.*CV.KPH_TO_MS, 40.*CV.KPH_TO_MS, 70.*CV.KPH_TO_MS, 100.*CV.KPH_TO_MS, 130.*CV.KPH_TO_MS]
     ret.longitudinalTuning.kpV = [1., 0.75, 0.6, 0.55, 0.5, 0.35, 0.3]
     ret.longitudinalTuning.kiBP = [0., 130. * CV.KPH_TO_MS]
     ret.longitudinalTuning.kiV = [0.0525, 0.03]
+#    ret.longitudinalTuning.kpBP = [0, 10. * CV.KPH_TO_MS, 20. * CV.KPH_TO_MS, 40. * CV.KPH_TO_MS, 70. * CV.KPH_TO_MS, 100. * CV.KPH_TO_MS, 130. * CV.KPH_TO_MS]
+#    ret.longitudinalTuning.kpV = [0.674, 0.654, 0.65, 0.5, 0.38, 0.32, 0.20]
+#    ret.longitudinalTuning.kiBP = [0., 30. * CV.KPH_TO_MS, 60. * CV.KPH_TO_MS]
+#    ret.longitudinalTuning.kiV = [0.0115, 0.015, 0.0155]
+#    ret.longitudinalTuning.kfBP = [50. * CV.KPH_TO_MS, 100. * CV.KPH_TO_MS]
+#    ret.longitudinalTuning.kfV = [0.79, 0.48]
+
     ret.longitudinalTuning.deadzoneBP = [0., 100.*CV.KPH_TO_MS]
     ret.longitudinalTuning.deadzoneV = [0., 0.015]
     ret.longitudinalActuatorDelayLowerBound = 0.15
@@ -80,6 +94,11 @@ class CarInterface(CarInterfaceBase):
     ret.stopAccel = -2.0
     ret.startingAccelRate = 5.5  # brake_travel/s while releasing on restart
     ret.stoppingDecelRate = 0.2  # brake_travel/s while trying to stop
+#    ret.startAccel = -0.8
+#    ret.stopAccel = -2.0
+#    ret.startingAccelRate = 3.6  # brake_travel/s while releasing on restart
+#    ret.stoppingDecelRate = 0.5  # brake_travel/s while trying to stop
+
     ret.vEgoStopping = 0.6
     ret.vEgoStarting = 0.5
 
@@ -105,6 +124,7 @@ class CarInterface(CarInterfaceBase):
       ret.mass = 2290
       ret.wheelbase = 3.45
       ret.centerToFront = ret.wheelbase * 0.4
+      ret.maxSteeringAngleDeg = 120.
     elif candidate == CAR.GENESIS_G90:
       ret.mass = 2150
       ret.wheelbase = 3.16
